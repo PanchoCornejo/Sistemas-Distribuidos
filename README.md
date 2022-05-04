@@ -72,3 +72,17 @@ Tabla comparativa de tiempos:
 | LFU| 144.915ms | 2.340ms | 1.503ms | 7.391ms |
 
 Para este caso y como se puede apreciar en la tabla comparativa recomiendo usar LFU ya que elimina las menos usadas recientemente y esto nos esta dando tiempos de entradas menores a este tipo de consultas a la base de datos.
+
+### Visualizacion de la memoria Redis
+
+Gracias a Redis Commander podemos ver todas las consultas guardadas en cache de nuestro servicio para esto tenemos que instalar redis commander:
+
+`npm install -g redis-commander`
+
+y ejecutamos:
+
+`redis-commander`
+
+lo cual nos mostrara una interfaz donde podremos ver las llaves con su contenido dentro
+
+![no carga la imagen](https://cdn.discordapp.com/attachments/878099236334485504/971263880678486097/rediscommander.png)
