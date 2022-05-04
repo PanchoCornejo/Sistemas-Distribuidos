@@ -19,6 +19,8 @@ que nos listara las imagenes que estamos corriendo, luego anotamos la id de el s
 
 buscamos la IP y la copiamos para luego pegarla en nuestro servidor ubicado en **/GRPCSERVER/** server.js donde debes reemplazar esta ip por la cual se encuentra puesta en host: "IP"
 
+![no carga la imagen](https://cdn.discordapp.com/attachments/878099236334485504/971260279985954826/ip.png)
+
 Luego guardamos el codigo y corremos nuestro servidor para esto entramos en la carpeta de **/GRPCSERVER** en la terminal y colocamos:
 
 `npm start`
@@ -62,3 +64,5 @@ Tabla comparativa de tiempos:
 | -----| ----- | ---- | ----- | ---- |
 | LRU| 205.378ms | 5.831ms | 3.491ms | 1.797ms |
 | LFU| 144.915ms | 2.340ms | 1.503ms | 7.391ms |
+
+Para este caso y como se puede apreciar en la tabla comparativa recomiendo usar LFU ya que elimina las menos usadas recientemente y esto nos esta dando tiempos de entradas menores a este tipo de consultas a la base de datos.
