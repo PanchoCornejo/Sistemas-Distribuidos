@@ -39,6 +39,8 @@ Un ejemplo de Busqueda:
 
 `localhost:4000/items/Gold`
 
+![no carga la imagen](https://cdn.discordapp.com/attachments/878099236334485504/971261244910743582/gold.png)
+
 ## Busquedas utilizando LRU y LFU
 
 Comparamos los tiempos de busqueda utilizando los metodos de LRU y LFU para esto entramos en la consola de nuestro REDIS con el comando:
