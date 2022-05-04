@@ -5,6 +5,10 @@ Tareas del Ramo
 ## Funcionamiento de la APP
 Para correr la tarea se requiere contar con Postgrsql, Node, Redis
 
+Dependencias Utilizadas:
+
+`npm i @grpc/grpc-js @grpc/proto-loader express grpc nodemon pg redis response-time`
+
 Se requiere correr el docker-compose para eso se ejecuta:
 
 `sudo docker-compose up`
