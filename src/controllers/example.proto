@@ -1,0 +1,34 @@
+syntax = 'proto3';
+// como se estructura lo que recibo o lo que enviare de vuelta
+message Item {
+    int32 id = 1;
+    string name = 2;
+    int32 price = 3;
+    string category = 4;
+    int32 count = 5;
+}
+// valores repetidos
+message ItemList {
+    repeated Item item = 1;
+}
+// valores repetidos opcion 2
+message Items {
+    repeated Item id = 1;
+    repeated Item name = 2;
+    repeated Item price = 3;
+    repeated Item category = 4;
+    repeated Item count = 5;
+}
+// lo que debo responder para completar la funcion getItem
+message Response {
+    repeated Item items = 1;
+}
+// lo que debo recibir para ejecuar la funcion  GetItem
+message GetItemsRequest {
+    string name = 1;
+}
+
+
+service ItemService {
+    rpc GetItem(GetItemsRequest) returns (Item) {}
+}

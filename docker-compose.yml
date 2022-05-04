@@ -1,0 +1,23 @@
+version: '3.7'
+
+networks:
+  app-tier:
+    driver: bridge
+
+services:
+
+  redis:
+    image: 'bitnami/redis:latest'
+    environment:
+      - ALLOW_EMPTY_PASSWORD=yes
+    networks:
+      - app-tier
+  postgres:
+    image: docker.io/bitnami/postgresql:11
+    volumes:
+      - ./dbb/init.sql:/docker-entrypoint-initdb.d/init.sql
+    environment:
+      - POSTGRESQL_USERNAME=postgres
+      - POSTGRESQL_DATABASE=tiendita
+      - ALLOW_EMPTY_PASSWORD=yes
+      - POSTGRESQL_PASSWORD=marihuana
