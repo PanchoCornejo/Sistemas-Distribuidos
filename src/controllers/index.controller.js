@@ -38,11 +38,26 @@ main();
 // Devolviendo toda la base de datos
 
 const getItems = async (req, res) => {
-    console.log('buscando por ID');
-    clienteGRPC.GetItem({name: 'todo'}, function(err,Item){
-        console.log('Verificando', Item);
-      });
-    res.json(clienteGRPC);
+  var id = 'todo';
+  try{
+    //buscamos la data en Redis
+    const reply = await client.get(id);
+    // si existe lo retorna desde Redisy finaliza la respuesta
+    if (reply) return res.send(JSON.parse(reply));
+    // Sino esta retornamos desde la base de datos
+    console.log('Entregando Toda la Base de Datos');
+    const response = clienteGRPC.GetItem({name: id },async function(err,Item){
+    console.log('Verificando', Item);
+    // guardando los Resultados en REDIS
+    console.log('Comenzando a subir la info');
+    const saveresult = await client.set(id,JSON.stringify(Item), function(err,reply){ console.log(reply)});
+    console.log('SE GUARDA: ' + saveresult);
+    // respondemos al Cliente
+    res.json(Item);
+    });
+  } catch (error){
+    //res.send(error.message);
+  }
 };
 
 // devolviendo la busqueda pedida
@@ -56,26 +71,17 @@ const getItemsID = async (req, res) => {
     if (reply) return res.send(JSON.parse(reply));
     // Sino esta retornamos desde la base de datos
     console.log('buscando por ID');
-    const response = clienteGRPC.GetItem({name: id }, function(err,Item){
+    const response = clienteGRPC.GetItem({name: id },async function(err,Item){
     console.log('Verificando', Item);
-    });
-    console.log('se supone que debemos tener algo');
-    // Probando ya que no se puede sacar la peticion
-    const prueba = {
-      id : 1,
-      name : 'Pancho',
-      price : 455,
-      category : 'Gamer',
-      count : 5
-    };
     // guardando los Resultados en REDIS
     console.log('Comenzando a subir la info');
-    const saveresult = await client.set(id,JSON.stringify(prueba), function(err,reply){ console.log(reply)});
+    const saveresult = await client.set(id,JSON.stringify(Item), function(err,reply){ console.log(reply)});
     console.log('SE GUARDA: ' + saveresult);
     // respondemos al Cliente
-    res.json(hola);
+    res.json(Item);
+    });
   } catch (error){
-    res.send(error.message);
+    //res.send(error.message);
   }
 };
 

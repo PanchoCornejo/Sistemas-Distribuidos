@@ -6,7 +6,7 @@ const { Pool } = require('pg');
 
 const pool = new Pool({
     user: 'postgres',
-    host: '172.25.0.2',
+    host: '192.168.64.2',
     password: 'marihuana',
     database: 'tiendita',
     port: '5432'
@@ -32,7 +32,7 @@ async function buscador(aux){
     console.log('entraste a todo');
     const datos = await pool.query('SELECT * FROM items');
     console.log(datos.rows);
-    return(datos);
+    return(datos.rows);
   } else {
     console.log('entraste a: ' + aux);
     const datos = await pool.query('SELECT * FROM items WHERE name LIKE $1',['%'+aux+'%']);
@@ -46,31 +46,9 @@ async function getItem (_, callback)  {
   const itemName = _.request.name;
   //corremos la funcion Callback
   const valores = await buscador(itemName);
-  console.log('nos llega....'+ valores[0].name);
-  const prueba = {
-    id : 1,
-    name : 'Pancho',
-    price : 455,
-    category : 'Gamer',
-    count : 5
-  };
-  const prueba2 = [{
-    id : 1,
-    name : 'Pancho',
-    price : 455,
-    category : 'Gamer',
-    count : 5
-  },{
-    id : 2,
-    name : 'Ignacio',
-    price : 455,
-    category : 'Gamer',
-    count : 6
-  }
-  ];
-  const prueba3 = JSON.stringify(prueba);
-  console.log('Convertido a JSON: ' + prueba3)
-  callback(null, prueba);
+  const itemd = {item: valores};
+  //Retornamos Callback
+  callback(null, itemd);
 };
 
 function main(){

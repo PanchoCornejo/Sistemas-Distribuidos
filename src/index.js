@@ -1,5 +1,5 @@
 const express = require("express");
-
+const responseTime = require("response-time");
 
 const app = express();
 
@@ -7,7 +7,7 @@ const app = express();
 //middlewares
 app.use(express.json());
 app.use(express.urlencoded({extended: false}));
-
+app.use(responseTime());
 //Routes
 app.use(require('./routes/index'));
 

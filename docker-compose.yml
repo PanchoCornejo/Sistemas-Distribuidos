@@ -12,6 +12,8 @@ services:
       - ALLOW_EMPTY_PASSWORD=yes
     networks:
       - app-tier
+    volumes:
+      - ./redis/overrides.conf:/opt/bitnami/redis/mounted-etc/overrides.conf
   postgres:
     image: docker.io/bitnami/postgresql:11
     volumes:

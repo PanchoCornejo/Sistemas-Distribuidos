@@ -30,5 +30,5 @@ message GetItemsRequest {
 
 
 service ItemService {
-    rpc GetItem(GetItemsRequest) returns (Item) {}
+    rpc GetItem(GetItemsRequest) returns (ItemList) {}
 }
